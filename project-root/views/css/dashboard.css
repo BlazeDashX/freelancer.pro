@@ -1,0 +1,125 @@
+/* css/dashboard.css */
+/* 1. Import Variables */
+@import 'variables.css';
+
+/* --- LAYOUT STRUCTURE --- */
+body { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border-light);
+    height: 100vh;
+    position: fixed;
+    top: 0; left: 0;
+    display: flex; flex-direction: column;
+    padding: 2rem 1.5rem;
+    z-index: 100;
+}
+
+.logo-text { font-size: 1.4rem; font-weight: 700; margin-bottom: 3rem; letter-spacing: -0.5px; }
+.logo-dot { color: var(--neon-primary); }
+
+.nav-menu { list-style: none; flex-grow: 1; }
+.nav-link {
+    display: flex; align-items: center; gap: 12px;
+    padding: 0.8rem 1rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+.nav-link:hover, .nav-link.active {
+    background: rgba(10, 255, 153, 0.05);
+    color: var(--text-main);
+    border-color: rgba(10, 255, 153, 0.1);
+}
+.nav-link.active i { color: var(--neon-primary); }
+
+/* Sidebar Footer (Logout) */
+.user-profile-mini {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-light);
+    text-align: center;
+}
+.logout-link {
+    color: var(--neon-danger); text-decoration: none; font-weight: 600; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: 0.3s;
+}
+.logout-link:hover { text-shadow: 0 0 10px rgba(255,68,68,0.4); }
+
+/* Main Content Area */
+.main-content {
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width));
+    padding: 2rem 3rem;
+}
+
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; }
+.welcome-text h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+.welcome-text p { color: var(--text-muted); }
+
+/* --- UI COMPONENTS (Buttons, Cards, Inputs) --- */
+
+/* 1. Buttons */
+.btn-primary, .btn-secondary, .btn-danger {
+    padding: 0.7rem 1.5rem; border-radius: 6px; font-weight: 600;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+    transition: 0.3s; cursor: pointer; border: none; font-family: 'Space Grotesk';
+}
+
+.btn-primary { background: var(--neon-primary); color: #000; }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 20px var(--glow-primary); }
+
+.btn-secondary { background: rgba(255,255,255,0.05); color: white; border: 1px solid var(--border-light); }
+.btn-secondary:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+.btn-danger { background: rgba(255,68,68,0.1); color: var(--neon-danger); border: 1px solid rgba(255,68,68,0.2); }
+.btn-danger:hover { background: var(--neon-danger); color: white; }
+
+/* 2. Stats Grid */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+.stat-card {
+    background: var(--surface); border: 1px solid var(--border-light);
+    padding: 1.5rem; border-radius: 12px; transition: 0.3s;
+}
+.stat-card:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+.stat-value { font-size: 1.8rem; font-weight: 700; font-family: 'Space Grotesk'; }
+
+/* 3. Forms (Profile, Post Job) */
+.settings-panel {
+    background: var(--surface); border: 1px solid var(--border-light);
+    border-radius: 12px; padding: 2rem; margin-bottom: 2rem;
+}
+.settings-panel h2 { border-bottom: 1px solid var(--border-light); padding-bottom: 1rem; margin-bottom: 1.5rem; }
+
+.form-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+.form-grid.two-col { grid-template-columns: 1fr 1fr; }
+
+.form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+.form-control {
+    width: 100%; background: var(--bg-panel); border: 1px solid var(--border-light);
+    color: var(--text-main); padding: 0.8rem 1rem; border-radius: 6px;
+    font-family: 'Outfit'; transition: 0.3s;
+}
+.form-control:focus { outline: none; border-color: var(--neon-primary); box-shadow: 0 0 0 3px var(--glow-primary); }
+
+/* 4. Tables */
+.table-container { background: var(--surface); border: 1px solid var(--border-light); border-radius: 12px; overflow: hidden; }
+.custom-table { width: 100%; border-collapse: collapse; }
+.custom-table th { text-align: left; padding: 1.2rem; background: rgba(255,255,255,0.02); color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; }
+.custom-table td { padding: 1.2rem; border-bottom: 1px solid var(--border-light); }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .sidebar { width: 80px; padding: 2rem 1rem; }
+    .logo-text, .nav-link span, .user-profile-mini span { display: none; }
+    .nav-link { justify-content: center; }
+    .main-content { margin-left: 80px; width: calc(100% - 80px); }
+    .stats-grid, .form-grid.two-col { grid-template-columns: 1fr; }
+}

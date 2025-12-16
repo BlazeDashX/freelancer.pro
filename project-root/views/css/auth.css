@@ -1,0 +1,65 @@
+/* css/auth.css */
+@import 'variables.css';
+
+body.auth-body { overflow-x: hidden; }
+
+/* --- SHARED LAYOUTS --- */
+
+/* Layout A: Split Screen (For Registration) */
+.split-layout { display: flex; min-height: 100vh; }
+
+.split-visual {
+    width: 40%; position: relative;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 4rem; border-right: 1px solid var(--border-light);
+    overflow: hidden;
+}
+.split-visual img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: -1; }
+.split-visual h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; position: relative; z-index: 2; }
+.split-visual .highlight { color: var(--neon-primary); text-shadow: 0 0 30px var(--glow-primary); }
+
+.split-form { width: 60%; padding: 4rem; overflow-y: auto; background: var(--bg-panel); display: flex; justify-content: center; }
+.form-wrapper { width: 100%; max-width: 600px; }
+
+/* Layout B: Centered Card (For Login) */
+.login-layout {
+    display: flex; height: 100vh;
+}
+.login-brand { width: 45%; background: radial-gradient(circle at 50% 120%, #1a1f2e, var(--bg-deep)); padding: 4rem; display: flex; flex-direction: column; justify-content: center; border-right: 1px solid var(--border-light); }
+.login-form-area { width: 55%; background: var(--bg-panel); display: flex; align-items: center; justify-content: center; }
+
+/* --- SHARED FORM ELEMENTS --- */
+.auth-header { margin-bottom: 2.5rem; }
+.auth-header h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+
+.input-group { margin-bottom: 1.5rem; position: relative; }
+.input-group label { display: block; margin-bottom: 0.5rem; color: var(--text-muted); font-size: 0.9rem; }
+.input-wrapper { position: relative; }
+
+.input-wrapper input {
+    width: 100%; padding: 1rem 1rem 1rem 3rem; /* Space for icon */
+    background: var(--surface); border: 1px solid var(--border-light);
+    border-radius: 8px; color: white; font-family: 'Outfit';
+    transition: 0.3s;
+}
+.input-wrapper i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #555; transition: 0.3s; }
+
+.input-wrapper input:focus { border-color: var(--neon-primary); box-shadow: 0 0 0 4px var(--glow-primary); outline: none; }
+.input-wrapper input:focus + i { color: var(--neon-primary); }
+
+.btn-submit {
+    width: 100%; padding: 1rem; background: var(--neon-primary); color: black;
+    font-weight: 700; border: none; border-radius: 8px; cursor: pointer;
+    font-family: 'Space Grotesk'; font-size: 1.1rem; transition: 0.3s; margin-top: 1rem;
+}
+.btn-submit:hover { background: white; box-shadow: 0 0 25px var(--glow-primary); }
+
+/* --- UTILITIES --- */
+.error-msg { color: var(--neon-danger); font-size: 0.85rem; margin-top: 5px; display: block; }
+
+/* Responsive */
+@media (max-width: 900px) {
+    .split-layout, .login-layout { flex-direction: column; height: auto; }
+    .split-visual, .login-brand { width: 100%; height: 300px; padding: 2rem; }
+    .split-form, .login-form-area { width: 100%; padding: 2rem; }
+}
