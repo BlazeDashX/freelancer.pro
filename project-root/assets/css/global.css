@@ -1,0 +1,154 @@
+@import './variables.css';
+
+/* =========================================
+   1. RESET & BASE
+   ========================================= */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%; 
+    background-color: var(--bg-deep);
+    font-family: 'Outfit', sans-serif;
+    color: var(--text-main);
+    line-height: 1.7;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.02em;
+}
+
+/* =========================================
+   2. NAVBAR
+   ========================================= */
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(2, 2, 3, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.navbar {
+    max-width: 1400px;
+    height: 80px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s var(--ease);
+}
+
+.nav-links a:not(.btn-login)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 2px;
+    background: var(--neon-primary);
+    transition: width 0.3s var(--ease);
+}
+
+.nav-links a:not(.btn-login):hover {
+    color: var(--neon-primary);
+}
+
+.nav-links a:not(.btn-login):hover::after {
+    width: 100%;
+}
+
+.btn-login {
+    padding: 0.6rem 1.8rem;
+    border-radius: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border-light);
+    color: var(--text-main);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s var(--ease);
+}
+
+.btn-login:hover {
+    color: var(--neon-primary);
+    border-color: var(--neon-primary);
+    box-shadow: 0 0 20px var(--glow-primary);
+}
+
+/* =========================================
+   3. FOOTER
+   ========================================= */
+footer {
+    margin-top: auto;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border-light);
+    padding: 4rem 2rem 2rem;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.footer-column h4 {
+    margin-bottom: 1.2rem;
+}
+
+.footer-column a {
+    display: block;
+    margin-bottom: 0.6rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: var(--neon-secondary);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-light);
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}

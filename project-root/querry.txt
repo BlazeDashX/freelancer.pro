@@ -1,0 +1,44 @@
+-- User Table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('client', 'freelancer', 'admin') NOT NULL, -- This controls access
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Client Details
+CREATE TABLE client_profiles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL, -- Links to users.id
+    company_name VARCHAR(100),
+    payment_verified BOOLEAN DEFAULT 0,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Freelancer Details
+CREATE TABLE freelancer_profiles (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL, -- Links to users.id
+    skills TEXT,
+    hourly_rate DECIMAL(10,2),
+    portfolio_link VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Jobs Details
+
+CREATE TABLE jobs (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    client_id INT(11) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    category VARCHAR(100) NOT NULL,
+    budget_type ENUM('fixed', 'hourly') NOT NULL,
+    budget_amount DECIMAL(10,2) NOT NULL,
+    status ENUM('open', 'closed') DEFAULT 'open',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (client_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

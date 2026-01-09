@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../model/clientRegDb.php'; // Ensure this path is correct
+require_once '../model/clientRegistrationDB.php';
 
 // --- FIX 1: INSTANTIATE DATABASE CONNECTION ---
 $db = new mydb();
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // --- FIX 3: SELECT FROM 'clients' TABLE (Not 'users') ---
     // Note: We removed 'role' from SELECT because your registration didn't insert it.
     $stmt = $conn->prepare("SELECT id, username, password FROM clients WHERE email = ?");
-    
+
     if ($stmt) {
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -48,17 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
-            
+
             // 2. Verify Hashed Password
             if (password_verify($password, $user['password'])) {
-                
+
                 // Set Session Variables
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_email'] = $email;
-                
+
                 // --- FIX 4: MANUALLY ASSIGN ROLE ---
                 // Since this login is specifically reading from the 'clients' table
-                $_SESSION['user_role'] = 'client'; 
+                $_SESSION['user_role'] = 'client';
 
                 // Determine Redirect Path
                 $redirectUrl = match ($_SESSION['user_role']) {
@@ -70,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // 3. Trigger JS Success Flag
                 $loginSuccess = true;
-                
             } else {
                 $error = "Invalid email or password.";
             }
@@ -85,27 +84,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Freelance.Pro</title>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <link rel="stylesheet" href="css/auth.css"> <style>
+    <link rel="stylesheet" href="../assets/css/auth.css">
+    <style>
         /* Embedding critical CSS if the file link is broken */
         :root {
             --neon-primary: #3b82f6;
         }
+
         /* (Your existing CSS logic here via link) */
     </style>
 </head>
+
 <body>
 
     <div class="brand-section">
@@ -116,18 +119,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="hero-text">
             <h1>Find the <br><span class="highlight">Top 1% Talent</span></h1>
             <p>Join the decentralized marketplace trusted by the world's leading tech startups.</p>
-            
+
             <div class="proof-chips">
                 <div class="chip"><i class="fas fa-check-circle"></i> Verified Pros</div>
                 <div class="chip"><i class="fas fa-shield-alt"></i> Secure Escrow</div>
             </div>
         </div>
-        
+
         <div style="font-size: 0.8rem; color: #444; margin-top: 2rem;">© 2025 Freelance.Pro Inc.</div>
     </div>
 
     <div class="login-section">
-        
+
         <div class="top-nav">
             <span>New here?</span>
             <a href="client/client_Reg.php">Create Account</a>
@@ -189,39 +192,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
-
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleIcon = document.querySelector('.toggle-pass');
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
-                toggleIcon.style.color = 'var(--neon-primary)';
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
-                toggleIcon.style.color = '';
-            }
-        }
-
-        // --- SUCCESS DIALOGUE LOGIC ---
-        <?php if ($loginSuccess): ?>
-        Swal.fire({
-            title: 'Login Successful!',
-            text: 'Redirecting to dashboard...',
-            icon: 'success',
-            background: '#ffffff',
-            confirmButtonColor: '#3b82f6',
-            timer: 2000,
-            timerProgressBar: true,
-            willClose: () => {
-                window.location.href = "<?= $redirectUrl ?>";
-            }
-        });
-        <?php endif; ?>
-    </script>
 </body>
+
 </html>

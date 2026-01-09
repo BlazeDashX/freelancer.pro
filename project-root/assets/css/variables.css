@@ -1,0 +1,87 @@
+/* ===============================
+   1. MODERN TEAL & CORAL
+=============================== */
+.theme-teal-coral {
+    --bg-deep: #0a1f1c;
+    --bg-panel: #112f2a;
+    --surface: #1a3b36;
+    --surface-hover: #1f453f;
+
+    --neon-primary: #00ffe1;
+    --neon-secondary: #ff6b6b;
+    --neon-danger: #ff4d4d;
+    --neon-warn: #ffd93d;
+
+    --glow-primary: rgba(0, 255, 225, 0.2);
+    --glow-secondary: rgba(255, 107, 107, 0.2);
+
+    --text-main: #ffffff;
+    --text-muted: #b0c1b8;
+    --border-light: rgba(255,255,255,0.08);
+}
+
+/* ===============================
+   2. PURPLE & CYAN
+=============================== */
+.theme-purple-cyan {
+    --bg-deep: #1a0b2e;
+    --bg-panel: #2a1c44;
+    --surface: #341d5b;
+    --surface-hover: #3e2970;
+
+    --neon-primary: #00fff5;
+    --neon-secondary: #d87fff;
+    --neon-danger: #ff4c4c;
+    --neon-warn: #ffca4c;
+
+    --glow-primary: rgba(0, 255, 245, 0.2);
+    --glow-secondary: rgba(216,127,255,0.2);
+
+    --text-main: #ffffff;
+    --text-muted: #c2b6d9;
+    --border-light: rgba(255,255,255,0.07);
+}
+
+/* ===============================
+   3. ORANGE & BLUE
+=============================== */
+.theme-orange-blue {
+    --bg-deep: #0d1015;
+    --bg-panel: #1b1f28;
+    --surface: #252935;
+    --surface-hover: #2e3142;
+
+    --neon-primary: #ff9f43;
+    --neon-secondary: #4dabf7;
+    --neon-danger: #ff4c4c;
+    --neon-warn: #ffd93d;
+
+    --glow-primary: rgba(255,159,67,0.2);
+    --glow-secondary: rgba(77,171,247,0.2);
+
+    --text-main: #ffffff;
+    --text-muted: #a0a6b5;
+    --border-light: rgba(255,255,255,0.06);
+}
+
+/* ===============================
+   4. MINIMAL GRAY & NEON GREEN
+=============================== */
+.theme-gray-green {
+    --bg-deep: #121212;
+    --bg-panel: #1e1e1e;
+    --surface: #2a2a2a;
+    --surface-hover: #333333;
+
+    --neon-primary: #00ff84;
+    --neon-secondary: #00d4ff;
+    --neon-danger: #ff4c4c;
+    --neon-warn: #ffc93d;
+
+    --glow-primary: rgba(0,255,132,0.2);
+    --glow-secondary: rgba(0,212,255,0.2);
+
+    --text-main: #ffffff;
+    --text-muted: #999999;
+    --border-light: rgba(255,255,255,0.05);
+}
